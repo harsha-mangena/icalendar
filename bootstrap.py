@@ -24,6 +24,7 @@ import sys
 import tempfile
 
 from optparse import OptionParser
+from security import safe_command
 
 tmpeggs = tempfile.mkdtemp()
 
@@ -156,7 +157,7 @@ if version:
 cmd.append(requirement)
 
 import subprocess
-if subprocess.call(cmd, env=dict(os.environ, PYTHONPATH=setuptools_path)) != 0:
+if safe_command.run(subprocess.call, cmd, env=dict(os.environ, PYTHONPATH=setuptools_path)) != 0:
     raise Exception(
         "Failed to execute command:\n%s" % repr(cmd)[1:-1])
 
