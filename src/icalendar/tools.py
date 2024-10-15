@@ -4,8 +4,7 @@ from icalendar.prop import vDatetime
 from icalendar.prop import vText
 from string import ascii_letters
 from string import digits
-
-import random
+import secrets
 
 
 class UIDGenerator:
@@ -18,7 +17,7 @@ class UIDGenerator:
     def rnd_string(length=16):
         """Generates a string with random characters of length.
         """
-        return ''.join([random.choice(UIDGenerator.chars) for _ in range(length)])
+        return ''.join([secrets.choice(UIDGenerator.chars) for _ in range(length)])
 
     @staticmethod
     def uid(host_name='example.com', unique=''):
